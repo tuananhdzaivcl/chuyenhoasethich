@@ -1,231 +1,1822 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#0a0818">
-<title>Hộp quà Bảng tuần hoàn</title>
-<style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;background:#0a0818;color:#fff;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif}
-body{background:
- radial-gradient(1.5px 1.5px at 12% 18%,#fff8 50%,transparent 51%),
- radial-gradient(1px 1px at 78% 12%,#fff7 50%,transparent 51%),
- radial-gradient(1.5px 1.5px at 88% 64%,#fff6 50%,transparent 51%),
- radial-gradient(1px 1px at 22% 82%,#fff7 50%,transparent 51%),
- radial-gradient(1px 1px at 52% 90%,#fff5 50%,transparent 51%),
- radial-gradient(ellipse at 50% 45%,#231a52 0%,#0a0818 72%)}
-#stage{position:fixed;inset:0;perspective:900px;perspective-origin:50% 45%;overflow:hidden;touch-action:none;cursor:pointer}
-.anchor{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#03020a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Cuốn Sách Ngân Hà & Bến Đò Tri Ân 20-11 ✨</title>
+    <!-- Three.js WebGL Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Luxury Vietnamese Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-/* ---------- Nguyên tố ---------- */
-#world{transform-style:preserve-3d}
-.el{position:absolute;left:0;top:0;display:flex;align-items:center;justify-content:center;border-radius:12%;color:#fff;font-weight:700;
- backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform;transform:scale(0)}
-.el b{font-weight:700;line-height:1;margin-top:-6%}
-.el i{position:absolute;left:8%;top:5%;font-style:normal;font-weight:400;opacity:.85;line-height:1}
-.el u{position:absolute;left:0;right:0;bottom:5%;text-align:center;text-decoration:none;font-weight:400;opacity:.9;line-height:1;white-space:nowrap}
-.dec{position:absolute;left:0;top:0;opacity:0;pointer-events:none;will-change:transform,opacity}
-.lb.b{color:#9ecbff}
-.lb{display:flex;align-items:center;justify-content:center;color:#ffd98a;font-weight:700}
-.lg{font-size:13px;line-height:1.25;padding:6px 9px;border:1px solid #ffffff30;border-radius:10px;background:#ffffff0d;color:#fff}
-.lg h4{margin:0;font-size:13px;color:#ffe9a8}
-.lg p{margin:0 0 4px;font-size:11px;opacity:.8}
-.lg div{display:grid;grid-template-columns:repeat(3,1fr);gap:2px 6px}
-.lg span{display:flex;align-items:center;gap:5px;white-space:nowrap}
-.lg s{width:12px;height:12px;border-radius:3px;flex:none}
+    <style>
+        :root {
+            --glow-primary: #ffaa00;
+            --glow-secondary: #ffe89e;
+            --glow-accent: #ff5e8e;
+            --bg-deep: #03020a;
+        }
 
-/* ---------- Giao diện ---------- */
-#title{position:fixed;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 14px);text-align:center;font-size:15px;letter-spacing:.14em;color:#ffe9a8;opacity:.85;pointer-events:none;font-weight:700}
-#hint{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);text-align:center;font-size:13px;color:#fff;pointer-events:none;transition:opacity .6s;padding:0 20px}
-#hint span{display:inline-block;padding:9px 18px;border-radius:99px;background:#ffffff18;border:1px solid #ffffff30;animation:pulse 1.8s ease-in-out infinite}
-#hint.hide{opacity:0}
-@keyframes pulse{50%{transform:scale(1.06);background:#ffffff2a}}
-#snd{position:fixed;right:calc(env(safe-area-inset-right,0px) + 12px);top:calc(env(safe-area-inset-top,0px) + 8px);width:44px;height:44px;border-radius:50%;
- border:1px solid #ffffff35;background:#ffffff14;color:#fff;font-size:20px;line-height:1;z-index:5;cursor:pointer}
-#zoom{position:fixed;right:calc(env(safe-area-inset-right,0px) + 12px);top:calc(env(safe-area-inset-top,0px) + 58px);width:44px;height:44px;border-radius:50%;
- border:1px solid #ffffff35;background:#ffffff14;color:#fff;font-size:19px;line-height:1;z-index:5;cursor:pointer;display:none}
-#zoom.show{display:block}#zoom.on{background:#ffd24a55;border-color:#ffd24a}
-@media (prefers-reduced-motion:reduce){#hint span{animation:none}}
-</style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--bg-deep);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #ffffff;
+            cursor: grab;
+            touch-action: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body.is-dragging,
+        body.is-dragging * {
+            cursor: grabbing !important;
+        }
+
+        /* 3D WebGL Canvas */
+        #webgl-container {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            touch-action: none;
+        }
+
+        #webgl-container canvas {
+            display: block;
+            touch-action: none;
+        }
+
+        /* Luxury Celestial Star Cursor */
+        body.has-luxe-cursor,
+        body.has-luxe-cursor * {
+            cursor: none !important;
+        }
+
+        #luxe-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 48px;
+            height: 48px;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+            transition: opacity 0.25s ease;
+            will-change: transform, opacity;
+        }
+        #luxe-cursor.visible {
+            opacity: 1;
+        }
+
+        .luxe-cursor-ring {
+            position: absolute;
+            inset: 5px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 232, 158, 0.55);
+            box-shadow: 0 0 14px rgba(255, 170, 0, 0.55), inset 0 0 10px rgba(255, 232, 158, 0.28);
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        .luxe-cursor-star {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 12px var(--glow-primary));
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .luxe-cursor-star svg {
+            width: 21px;
+            height: 21px;
+            animation: luxeCursorTwinkle 2.6s ease-in-out infinite;
+        }
+
+        @keyframes luxeCursorTwinkle {
+            0%, 100% { transform: scale(0.9) rotate(0deg); opacity: 0.88; }
+            50% { transform: scale(1.08) rotate(14deg); opacity: 1; }
+        }
+
+        body.is-dragging .luxe-cursor-ring {
+            transform: scale(1.45);
+            border-color: var(--glow-primary);
+            box-shadow: 0 0 24px var(--glow-primary), inset 0 0 14px var(--glow-secondary);
+        }
+
+        body.is-dragging .luxe-cursor-star {
+            transform: scale(0.78) rotate(45deg);
+        }
+
+        /* Cinematic Vignette & Ambient Radial Glow */
+        .cinema-vignette {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            background:
+                radial-gradient(circle at 50% 50%, transparent 45%, rgba(2, 0, 6, 0.78) 100%),
+                radial-gradient(circle at 50% 45%, rgba(255, 42, 133, 0.08) 0%, transparent 60%);
+            transition: background 1.5s ease;
+        }
+
+        /* Shockwave Ring on Spacebar Theme Shift */
+        #chromatic-shockwave {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            border: 2px solid var(--glow-primary);
+            box-shadow: 0 0 60px var(--glow-primary), inset 0 0 40px var(--glow-secondary);
+            pointer-events: none;
+            z-index: 4;
+            opacity: 0;
+        }
+        .shockwave-active {
+            animation: rippleExpand 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes rippleExpand {
+            0% { transform: translate(-50%, -50%) scale(0.1); opacity: 0.95; }
+            100% { transform: translate(-50%, -50%) scale(140); opacity: 0; }
+        }
+
+        /* Ethereal Floating Title & Poetic Whisper (Zero Button Clutter) */
+        .font-serif-cinema {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .font-script-luxury {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .ethereal-header {
+            position: fixed;
+            top: 3.8vh;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            text-align: center;
+            pointer-events: none;
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+
+        .ethereal-subtitle {
+            font-size: clamp(0.6rem, 0.95vw, 0.72rem);
+            letter-spacing: 0.48em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.42);
+            margin-bottom: 0.25rem;
+            text-shadow: 0 0 14px var(--glow-primary);
+        }
+
+        .ethereal-main-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: clamp(1.35rem, 2.5vw, 2.15rem);
+            letter-spacing: 0.08em;
+            color: rgba(255, 255, 255, 0.78);
+            text-shadow: 0 0 24px var(--glow-primary), 0 0 48px rgba(255, 215, 120, 0.28);
+        }
+
+        /* 3D Floating Vietnamese Poetic Whispers Layer (Ultra Subtle) */
+        #whispers-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 3;
+            overflow: hidden;
+        }
+        .floating-whisper {
+            position: absolute;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: clamp(0.85rem, 1.15vw, 1.02rem);
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+            color: rgba(255, 255, 255, 0.52);
+            text-shadow: 0 0 12px var(--glow-primary), 0 0 22px var(--glow-secondary);
+            pointer-events: none;
+            will-change: transform, opacity;
+            transition: color 1s ease, text-shadow 1s ease;
+        }
+
+        /* Whisper-thin Bottom Instruction (Strict Minimalist UX) */
+        .whisper-instruction {
+            position: fixed;
+            bottom: 2.6vh;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 6;
+            pointer-events: none;
+            text-align: center;
+            width: 94%;
+            max-width: 900px;
+            opacity: 0.34;
+            transition: opacity 0.6s ease;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(0.8rem, 1.15vw, 0.96rem);
+            letter-spacing: 0.16em;
+            color: #ffffff;
+            text-shadow: 0 0 12px var(--glow-primary);
+        }
+        body:hover .whisper-instruction {
+            opacity: 0.56;
+        }
+
+        /* Thin Progress Aura Ring around Center during Hold Charge */
+        #charge-aura-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 280px;
+            height: 280px;
+            transform: translate(-50%, -50%) scale(0.75);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 0 50px var(--glow-primary), inset 0 0 35px var(--glow-secondary);
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0;
+            transition: opacity 0.35s ease, transform 0.2s ease-out;
+        }
+
+        /* Frameless Lumina Glass Love Letter (Holographic Aurora Refraction) */
+        #lumina-love-letter {
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: radial-gradient(circle at center, rgba(8, 2, 18, 0.55) 0%, rgba(2, 0, 6, 0.82) 100%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            cursor: default;
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.9s ease;
+        }
+        #lumina-love-letter.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .lumina-glass-slab {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            padding: clamp(2rem, 4.5vw, 3.4rem);
+            border-radius: 32px;
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(18, 12, 32, 0.58) 52%,
+                rgba(255, 185, 60, 0.09) 100%
+            );
+            box-shadow:
+                0 35px 95px rgba(0, 0, 0, 0.75),
+                0 0 65px rgba(255, 174, 0, 0.22),
+                inset 0 0 1.5px 1px rgba(255, 232, 160, 0.32),
+                inset 0 0 50px rgba(255, 174, 0, 0.1);
+            transform: translateY(35px) scale(0.92) rotateX(8deg);
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 1s ease;
+            overflow: hidden;
+            text-align: center;
+            cursor: default;
+        }
+        #lumina-love-letter.active .lumina-glass-slab {
+            transform: translateY(0) scale(1) rotateX(0deg);
+        }
+
+        /* Holographic Prismatic Shimmer inside the Love Letter */
+        .lumina-glass-slab::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg at 50% 50%,
+                transparent 0deg,
+                rgba(255, 215, 110, 0.14) 60deg,
+                rgba(255, 130, 180, 0.12) 120deg,
+                transparent 180deg,
+                rgba(120, 210, 255, 0.12) 240deg,
+                rgba(255, 180, 50, 0.14) 300deg,
+                transparent 360deg
+            );
+            animation: rotateAurora 20s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes rotateAurora {
+            100% { transform: rotate(360deg); }
+        }
+
+        .letter-copy {
+            position: relative;
+            z-index: 2;
+            outline: none;
+            transition: text-shadow 0.3s ease, opacity 0.4s ease;
+        }
+
+        /* ===== Thay Tailwind CDN bằng CSS tối thiểu (nhẹ, không cần mạng) ===== */
+        h1,h2{font-weight:inherit;font-size:inherit}
+        .relative{position:relative}.z-10{z-index:10}.uppercase{text-transform:uppercase}.italic{font-style:italic}.not-italic{font-style:normal}.font-normal{font-weight:400}
+        .text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-lg{font-size:1.125rem}.text-sm{font-size:.875rem;line-height:1.25rem}
+        .tracking-\[0\.42em\]{letter-spacing:.42em}.tracking-\[0\.22em\]{letter-spacing:.22em}.tracking-\[0\.18em\]{letter-spacing:.18em}
+        .text-white{color:#fff}.text-white\/40{color:rgba(255,255,255,.4)}.text-amber-200\/75{color:rgba(253,230,138,.75)}.text-amber-200\/95{color:rgba(253,230,138,.95)}.text-amber-50\/90{color:rgba(255,251,235,.9)}
+        .mb-3{margin-bottom:.75rem}.mb-5{margin-bottom:1.25rem}.mt-6{margin-top:1.5rem}.pt-5{padding-top:1.25rem}.px-2{padding-left:.5rem;padding-right:.5rem}.space-y-4>*+*{margin-top:1rem}
+        @media(min-width:640px){.sm\:text-6xl{font-size:3.75rem;line-height:1}.sm\:text-xl{font-size:1.25rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}}
+
+        /* ===== Tối ưu điện thoại ===== */
+        html,body{-webkit-touch-callout:none;overscroll-behavior:none}
+        @supports (height:100dvh){html,body{height:100dvh}}
+        .ethereal-header{top:calc(env(safe-area-inset-top,0px) + 2.4vh);width:min(94vw,820px)}
+        .whisper-instruction{bottom:calc(env(safe-area-inset-bottom,0px) + 2.6vh)}
+        #letterBody{max-height:46vh;max-height:46dvh;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;line-height:1.65}
+        .only-touch{display:none}
+        .touch-bar{display:none;position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);justify-content:center;gap:12px;z-index:7;pointer-events:none}
+        .ui-btn{pointer-events:auto;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,232,158,.45);background:rgba(10,6,24,.6);color:#fff;font:500 14px 'Plus Jakarta Sans',sans-serif;letter-spacing:.04em;box-shadow:0 0 16px rgba(255,170,0,.28);touch-action:manipulation;cursor:pointer;-webkit-tap-highlight-color:transparent}
+        .ui-btn:active{transform:scale(.96);background:rgba(255,170,0,.28)}
+        .letter-actions{display:flex;justify-content:center;gap:10px;margin-top:1.2rem;position:relative;z-index:3}
+        @media (pointer:coarse){
+            .only-touch{display:inline}.only-fine{display:none}
+            .touch-bar{display:flex}
+            .whisper-instruction{bottom:calc(env(safe-area-inset-bottom,0px) + 76px);opacity:.55;font-size:.8rem;letter-spacing:.06em;line-height:1.55}
+            #luxe-cursor{display:none}
+            #lumina-love-letter{backdrop-filter:none;-webkit-backdrop-filter:none;background:radial-gradient(circle at center,rgba(8,2,18,.82) 0%,rgba(2,0,6,.94) 100%)}
+        }
+        @media (max-width:640px){
+            .ethereal-subtitle{font-size:.62rem;letter-spacing:.3em}
+            .ethereal-main-title{font-size:1.15rem;line-height:1.3;letter-spacing:.04em}
+            .floating-whisper{font-size:.74rem}
+            #lumina-love-letter{padding:calc(env(safe-area-inset-top,0px) + .9rem) .9rem calc(env(safe-area-inset-bottom,0px) + .9rem)}
+            .lumina-glass-slab{padding:1.5rem 1.1rem;border-radius:24px}
+            #letterBody{font-size:1.05rem}
+        }
+        @media (max-height:520px) and (orientation:landscape){
+            .ethereal-header{top:calc(env(safe-area-inset-top,0px) + 1.2vh)}
+            .ethereal-main-title{font-size:1rem}
+            .whisper-instruction{display:none}
+            #letterBody{max-height:30vh;max-height:30dvh}
+            .lumina-glass-slab{padding:1.1rem 1.4rem}
+            #letterTitle{font-size:2rem!important;margin-bottom:.5rem!important}
+        }
+    </style>
 </head>
 <body>
-<audio id="bgm" src="music.mp3" loop preload="auto" playsinline></audio>
-<div id="title">BẢNG TUẦN HOÀN</div>
-<button id="snd" aria-label="Bật/tắt nhạc">🔊</button>
-<button id="zoom" aria-label="Phóng to bảng">🔍</button>
 
-<div id="stage"><div class="anchor"><div id="world"></div></div></div>
-<div id="hint"><span>Chạm giữ để các nguyên tố tách ra và xoay tròn</span></div>
+    <!-- Luxury Celestial Star Cursor -->
+    <div id="luxe-cursor" aria-hidden="true">
+        <span class="luxe-cursor-ring"></span>
+        <span class="luxe-cursor-star">
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+                <defs>
+                    <radialGradient id="luxeCursorGold" cx="50%" cy="42%" r="66%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="38%" stop-color="#ffe89e"/>
+                        <stop offset="100%" stop-color="#ffaa00"/>
+                    </radialGradient>
+                </defs>
+                <path d="M16 1.4C17.5 9.6 22.4 14.5 30.6 16C22.4 17.5 17.5 22.4 16 30.6C14.5 22.4 9.6 17.5 1.4 16C9.6 14.5 14.5 9.6 16 1.4Z" fill="url(#luxeCursorGold)"/>
+                <circle cx="25.4" cy="6.6" r="1.15" fill="#fffbe6" opacity="0.95"/>
+                <circle cx="6.8" cy="24.2" r="0.85" fill="#fff3b0" opacity="0.8"/>
+            </svg>
+        </span>
+    </div>
 
-<script>
-(function(){
-const SYM="H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Hf Ta W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn Fr Ra Ac Th Pa U Np Pu Am Cm Bk Cf Es Fm Md No Lr Rf Db Sg Bh Hs Mt Ds Rg Cn Nh Fl Mc Lv Ts Og".split(" ");
-const MS="1.008 4.003 6.94 9.012 10.81 12.011 14.007 15.999 18.998 20.180 22.990 24.305 26.982 28.085 30.974 32.06 35.45 39.948 39.098 40.078 44.956 47.867 50.942 51.996 54.938 55.845 58.933 58.693 63.546 65.38 69.723 72.630 74.922 78.971 79.904 83.798 85.468 87.62 88.906 91.224 92.906 95.95 98 101.07 102.91 106.42 107.87 112.41 114.82 118.71 121.76 127.60 126.90 131.29 132.91 137.33 138.91 140.12 140.91 144.24 145 150.36 151.96 157.25 158.93 162.50 164.93 167.26 168.93 173.05 174.97 178.49 180.95 183.84 186.21 190.23 192.22 195.08 196.97 200.59 204.38 207.2 208.98 209 210 222 223 226 227 232.04 231.04 238.03 237 244 243 247 247 251 252 257 258 259 266 267 268 269 270 277 278 281 282 285 286 289 290 293 294 294".split(" ");
-const CAT=[["Kim loại kiềm",355],["Kiềm thổ",22],["Kim loại chuyển tiếp",218],["Kim loại yếu",172],["Á kim",60],["Phi kim",140],["Halogen",100],["Khí hiếm",280],["Họ lantan",305],["Họ actini",332]];
-const N=SYM.length,TAU=Math.PI*2,LW=480,RINGS=[6,11,17,22,28,34];
-const $=id=>document.getElementById(id);
-const stage=$("stage"),world=$("world"),hint=$("hint"),bgm=$("bgm"),snd=$("snd"),zbtn=$("zoom");
+    <!-- 3D WebGL Scene Container -->
+    <div id="webgl-container"></div>
 
-function cell(z){
-  if(z===1)return[1,1];if(z===2)return[18,1];
-  if(z<=4)return[z-2,2];if(z<=10)return[z+8,2];
-  if(z<=12)return[z-10,3];if(z<=18)return[z,3];
-  if(z<=36)return[z-18,4];if(z<=54)return[z-36,5];
-  if(z<=56)return[z-54,6];if(z<=70)return[z-54,8.7];
-  if(z===71)return[3,6];if(z<=86)return[z-68,6];
-  if(z<=88)return[z-86,7];if(z<=102)return[z-86,9.7];
-  if(z===103)return[3,7];return[z-100,7];
-}
-function cat(z){
-  const h=a=>a.indexOf(z)>-1;
-  if(h([3,11,19,37,55,87]))return 0;
-  if(h([4,12,20,38,56,88]))return 1;
-  if(h([5,14,32,33,51,52]))return 4;
-  if(h([1,6,7,8,15,16,34]))return 5;
-  if(h([9,17,35,53,85,117]))return 6;
-  if(h([2,10,18,36,54,86,118]))return 7;
-  if(z>=57&&z<=71)return 8;
-  if(z>=89&&z<=103)return 9;
-  if((z>=21&&z<=30)||(z>=39&&z<=48)||(z>=72&&z<=80)||(z>=104&&z<=112))return 2;
-  return 3;
-}
-const rnd=(i,k)=>{const x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x)};
-const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
-const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+    <!-- Cinematic Vignette Overlay -->
+    <div class="cinema-vignette"></div>
 
-// gán mỗi nguyên tố vào một vòng quỹ đạo
-const RK=[],RA=[];
-(function(){let i=0;RINGS.forEach((n,k)=>{for(let j=0;j<n;j++){RK[i]=k;RA[i]=j*TAU/n+k*.5;i++}})})();
+    <!-- Spacebar Chromatic Shockwave -->
+    <div id="chromatic-shockwave"></div>
 
-const els=[],D=[],D2=[],cells=[],dec=[];
-for(let i=0;i<N;i++){
-  const z=i+1,h=CAT[cat(z)][1],e=document.createElement("div");
-  e.className="el";
-  e.style.background="hsla("+h+",75%,50%,.34)";
-  e.style.border="1px solid hsla("+h+",90%,68%,.95)";
-  e.innerHTML="<i>"+z+"</i><b>"+SYM[i]+"</b><u>"+MS[i]+"</u>";
-  world.appendChild(e);
-  els.push(e);D.push(rnd(i,1));D2.push(rnd(i,2));cells.push(cell(z));
-}
-function mk(cls,html,c,r,leg){
-  const d=document.createElement("div");d.className="dec "+cls;d.innerHTML=html;world.appendChild(d);
-  dec.push({e:d,c:c,r:r,leg:leg});
-}
-const GN="IA IIA IIIB IVB VB VIB VIIB VIIIB VIIIB VIIIB IB IIB IIIA IVA VA VIA VIIA VIIIA".split(" ");
-GN.forEach((n,i)=>mk("lb gp"+(n.slice(-1)=="B"?" b":""),n,i+1,0));
-for(let p=1;p<=7;p++)mk("lb",p,0,p);
-mk("lg","<h4>Chu kì = hàng 1–7 · Nhóm = cột IA–VIIIA, IB–VIIIB</h4><p>Trên: số hiệu · Giữa: ký hiệu · Dưới: khối lượng nguyên tử</p><div>"+
-  CAT.map(c=>"<span><s style='background:hsl("+c[1]+",75%,50%)'></s>"+c[0]+"</span>").join("")+"</div>",7.5,2,1);
+    <!-- Charge Convergence Aura Indicator -->
+    <div id="charge-aura-indicator"></div>
 
-let W,H,cw,ch,asp,bw,bh,st,so,dr,off,zk,TX=[],TY=[],OX=[],OY=[],OZ=[];
-function layout(){
-  W=innerWidth;H=innerHeight;
-  const top=50,bot=44,avail=H-top-bot,chMax=avail/10.9,cwMax=(W-14)/19.3;
-  cw=Math.min(cwMax,chMax*1.35);asp=Math.min(chMax/cw,1.6);ch=cw*asp;
-  bw=Math.max(Math.min(W*.15,60),cw);bh=bw*asp;st=cw/bw;off=(top-bot)/2;zk=cw<30?2.6:1.7;
-  dr=Math.min(W*.46/6.3,H*.44/(6.3*.9));
-  so=Math.min(.76*dr/bw,.92*dr/bh);
-  const f1=Math.min(bw*.4,bh*.36),f2=Math.min(bw*.19,bh*.17),f3=Math.min(bw*.17,bh*.16);
-  for(let i=0;i<N;i++){
-    const c=cells[i],e=els[i];
-    TX[i]=(c[0]-9)*cw;TY[i]=(c[1]-4.85)*ch+off;
-    OX[i]=(rnd(i,3)-.5)*W*.7;OY[i]=(rnd(i,4)-.5)*H*.5;OZ[i]=rnd(i,5)*bw*6;
-    e.style.width=bw+"px";e.style.height=bh+"px";e.style.left=-bw/2+"px";e.style.top=-bh/2+"px";
-    e.style.fontSize=f1+"px";e.children[0].style.fontSize=f2+"px";e.children[2].style.fontSize=f3+"px";
-  }
-  dec.forEach(d=>{
-    const e=d.e;
-    if(d.leg){const lh=LW*(3*ch)/(9.8*cw);e.style.width=LW+"px";e.style.height=lh+"px";e.style.left=-LW/2+"px";e.style.top=-lh/2+"px"}
-    else{e.style.width=bw+"px";e.style.height=bh+"px";e.style.left=-bw/2+"px";e.style.top=-bh/2+"px";e.style.fontSize=(e.classList.contains("gp")?Math.min(bw*.3,bh*.4):Math.min(bw*.4,bh*.4))+"px"}
-  });
-  drawn=false;
-}
+    <!-- Floating 3D-Projected Vietnamese Poetic Whispers (Minimal & Subtle) -->
+    <div id="whispers-container"></div>
 
-let revealing=false,ready=false,holding=false,zoomOn=false;
-let rt=0,t=0,theta=0,clock=0,lastX=0,lastY=0,drawn=false,zt=1,zsm=1,px=0,py=0;
+    <!-- Top Ethereal Poetic Header (Minimalist Cinema) -->
+    <header class="ethereal-header" id="topHeader">
+        <div class="ethereal-subtitle" id="paletteTitle">20 • 11 • Hoàng Kim Tri Thức</div>
+        <h1 class="ethereal-main-title" id="stateSubtitle">Cuốn Sách Ngân Hà &amp; Đóa Sen Tri Ân</h1>
+    </header>
 
-function startAudio(){
-  if(muted||!bgm.paused)return;
-  try{bgm.volume=.85;const p=bgm.play();if(p&&p.catch)p.catch(()=>{})}catch(e){}
-}
-let muted=false;
-stage.addEventListener("pointerdown",e=>{
-  startAudio();
-  if(!ready)return;
-  holding=true;lastX=e.clientX;lastY=e.clientY;
-  hint.classList.add("hide");
-  try{stage.setPointerCapture(e.pointerId)}catch(_){}
-});
-stage.addEventListener("pointermove",e=>{
-  if(!holding)return;
-  const dx=e.clientX-lastX,dy=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;
-  if(zoomOn){px+=dx;py+=dy}else theta+=dx*.012;
-});
-const release=()=>{holding=false};
-stage.addEventListener("pointerup",release);
-stage.addEventListener("pointercancel",release);
-stage.addEventListener("contextmenu",e=>e.preventDefault());
-document.addEventListener("touchmove",e=>e.preventDefault(),{passive:false});
-zbtn.addEventListener("click",()=>{
-  if(!ready)return;
-  zoomOn=!zoomOn;zt=zoomOn?zk:1;zbtn.classList.toggle("on",zoomOn);
-});
-snd.addEventListener("click",()=>{
-  muted=!muted;bgm.muted=muted;snd.textContent=muted?"🔇":"🔊";
-  if(!muted)startAudio();
-});
-document.addEventListener("visibilitychange",()=>{
-  if(document.hidden)bgm.pause();else startAudio();
-});
-addEventListener("resize",layout);
-addEventListener("orientationchange",()=>setTimeout(layout,250));
+    <!-- Single Whisper-Thin Translucent Bottom Instruction (Strict Minimalist Mandate) -->
+    <div class="whisper-instruction"><span class="only-fine">
+        [Kéo chuột] Xoay 360° ngắm toàn cảnh &amp; Cuộn để thu phóng • [Giữ chuột] Kết tinh Bến Đò Tri Thức • [Nhấn đúp] Mở tâm thư 20-11 • [Space] Đổi sắc thái thiên hà
+    </span><span class="only-touch">Kéo để xoay 360° • Chụm hai ngón để thu phóng • Giữ ngón tay để kết tinh Bến Đò Tri Thức • Chạm đúp để mở tâm thư 20-11</span></div>
+    <!-- Nút cảm ứng (chỉ hiện trên điện thoại/máy tính bảng) -->
+    <div class="touch-bar">
+        <button class="ui-btn" id="btnPalette" type="button">✦ Đổi sắc</button>
+        <button class="ui-btn" id="btnLetter" type="button">✉ Tâm thư</button>
+    </div>
 
-function draw(){
-  const zs=zsm;
-  const lx=Math.max(0,(19.3*cw*zs-W)/2+16),ly=Math.max(0,(10.9*ch*zs-H)/2+16);
-  px=clamp(px,-lx,lx);py=clamp(py,-ly,ly);
-  const al=.5+.2*Math.sin(clock*.6),ca=Math.cos(al),sa=Math.sin(al);
-  for(let i=0;i<N;i++){
-    const p=ease(clamp((t-D[i]*.45)/.55,0,1)),k=RK[i];
-    const ph=RA[i]+(k%2?-1:1)*theta*(1.6-k*.22);
-    const r=(k+1)*dr,ox=Math.cos(ph)*r,oy=Math.sin(ph)*r*ca,oz=Math.sin(ph)*r*sa;
-    const arc=Math.sin(Math.PI*p);
-    const rr=ease(clamp((rt-D2[i]*.5)/.5,0,1));
-    const tx=TX[i]*zs+px,ty=TY[i]*zs+py,s0=st*zs*.93;
-    const x=(tx+(ox-tx)*p+OX[i]*arc)*rr,y=(ty+(oy-ty)*p+OY[i]*arc)*rr,z=(oz*p+OZ[i]*arc)*rr;
-    const s=(s0+(so-s0)*p)*rr;
-    els[i].style.transform="translate3d("+x.toFixed(1)+"px,"+y.toFixed(1)+"px,"+z.toFixed(1)+"px) rotate("+((rnd(i,6)-.5)*1.4*arc).toFixed(3)+"rad) scale("+s.toFixed(3)+")";
-  }
-  const fade=(1-clamp(t*5,0,1))*ease(clamp((rt-.5)/.5,0,1));
-  for(let j=0;j<dec.length;j++){
-    const d=dec[j],x=((d.c-9)*cw)*zs+px,y=((d.r-4.85)*ch+off)*zs+py;
-    const k=d.leg?9.8*cw*zs/LW:st*zs;
-    d.e.style.transform="translate3d("+x.toFixed(1)+"px,"+y.toFixed(1)+"px,0) scale("+k.toFixed(3)+")";
-    d.e.style.opacity=fade.toFixed(2);
-  }
-}
+    <!-- Frameless Biomorphic Frosted Glass Scroll / Letter ("Tâm Thư Tri Ân 20-11") -->
+    <div id="lumina-love-letter">
+        <div class="lumina-glass-slab" id="luminaSlab">
+            <div class="relative z-10">
+                <p id="letterBadge" class="text-[10px] uppercase tracking-[0.42em] text-amber-200/75 mb-3">
+                    ✦ Tâm Thư Tri Ân 20-11 • Bụi Phấn Hóa Sao Trời (1/5) ✦
+                </p>
 
-let last=performance.now();
-function frame(now){
-  requestAnimationFrame(frame);
-  const dt=Math.min(.05,(now-last)/1000);last=now;
-  if(revealing&&rt<1)rt=Math.min(1,rt+dt/1.8);
-  const tgt=(holding&&ready&&!zoomOn)?1:0;
-  if(t<tgt)t=Math.min(tgt,t+dt/1.3);else if(t>tgt)t=Math.max(tgt,t-dt/.9);
-  const kz=1-Math.exp(-dt*8);
-  zsm+=(zt-zsm)*kz;if(Math.abs(zt-zsm)<.003)zsm=zt;
-  if(!zoomOn&&!holding){px+=-px*kz;py+=-py*kz;if(Math.abs(px)+Math.abs(py)<.5){px=0;py=0}}
-  if(t>.02){theta+=dt*.8*t;clock+=dt}
-  const idle=!revealing?true:(rt>=1&&t===0&&!holding&&zsm===zt&&(zoomOn||(px===0&&py===0)));
-  if(idle&&drawn)return;
-  draw();drawn=idle;
-}
-layout();
-requestAnimationFrame(frame);
-setTimeout(()=>{revealing=true;startAudio()},250);
-setTimeout(()=>{ready=true;zbtn.classList.add("show")},1800);
-})();
-</script>
+                <h2 id="letterTitle"
+                    class="letter-copy font-script-luxury text-4xl sm:text-6xl text-white mb-5"
+                    style="text-shadow: 0 0 25px var(--glow-primary), 0 0 45px var(--glow-secondary);">
+                    Kính Gửi Người Gieo Hạt Ánh Sáng
+                </h2>
+
+                <div id="letterBody"
+                     class="letter-copy font-serif-cinema italic text-lg sm:text-xl leading-relaxed text-amber-50/90 space-y-4 max-h-[46vh] overflow-y-auto px-2">
+                    <p>
+                        Có những hạt bụi phấn rơi xuống bục giảng năm nào nhưng chưa bao giờ tan biến — chúng đã lặng lẽ hóa thành hàng vạn vì sao dẫn lối cho chúng em đi qua những vùng trời rộng lớn của cuộc đời.
+                    </p>
+                    <p>
+                        Nhân ngày Nhà Giáo Việt Nam 20-11, từ tận đáy lòng, em xin gửi tới Thầy Cô ngàn đóa hoa tri ân rực rỡ nhất. Chúc Thầy Cô luôn dồi dào sức khỏe, giữ mãi ngọn lửa nhiệt huyết ấm áp và bình yên trên từng chuyến đò tri thức.
+                    </p>
+                </div>
+
+                <p id="letterSign"
+                   class="letter-copy font-serif-cinema text-amber-200/95 not-italic font-normal text-sm sm:text-base tracking-[0.22em] pt-5">
+                    — Trọn Đời Khắc Ghi Công Ơn Thầy Cô —
+                </p>
+
+                <div class="letter-actions">
+                    <button class="ui-btn" id="btnNext" type="button">↻ Mẫu khác</button>
+                    <button class="ui-btn" id="btnClose" type="button">✕ Đóng</button>
+                </div>
+                <p class="mt-6 text-[11px] font-serif-cinema italic tracking-[0.18em] text-white/40"><span class="only-fine">
+                    (Nhấn phím [TAB] để đổi mẫu tâm tư 20-11 • Nhấn [ESC] hoặc chạm ra ngoài để đóng)
+                </span><span class="only-touch">Chạm “Mẫu khác” để đổi tâm thư • Chạm ra ngoài để đóng</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ==========================================================================
+           1. FIVE REGAL 20-11 CHROMATIC PALETTES (SPACEBAR SHOCKWAVE SHIFT)
+           ========================================================================== */
+        const CHROMATIC_PALETTES = [
+            {
+                name: "20 • 11 • Hoàng Kim Tri Thức",
+                primary: new THREE.Color("#ffaa00"),      // Imperial Gold Pages
+                secondary: new THREE.Color("#ffe89e"),    // Warm Amber Starlight
+                accent: new THREE.Color("#ff5e8e"),       // Lotus Rose Petals
+                butterfly: new THREE.Color("#fff3b0"),    // Golden Crystal Wing
+                flame: new THREE.Color("#ffdd55"),        // Wisdom Lantern Flame
+                bgHex: "#03020a",
+                cssPrimary: "#ffaa00",
+                cssSecondary: "#ffe89e"
+            },
+            {
+                name: "20 • 11 • Sen Hồng Tri Ân",
+                primary: new THREE.Color("#ff2a85"),      // Sacred Lotus Rose
+                secondary: new THREE.Color("#ffd166"),    // Champagne Gold Ink
+                accent: new THREE.Color("#ff85c0"),       // Soft Silk Petal
+                butterfly: new THREE.Color("#ffe5ec"),    // Pearl Rose Wing
+                flame: new THREE.Color("#ffae00"),        // Warm Golden Flame
+                bgHex: "#06010a",
+                cssPrimary: "#ff2a85",
+                cssSecondary: "#ffd166"
+            },
+            {
+                name: "20 • 11 • Ngân Hà Bụi Phấn",
+                primary: new THREE.Color("#e0f2fe"),      // Chalk Starlight Silver
+                secondary: new THREE.Color("#38bdf8"),    // Cyan Aurora Wave
+                accent: new THREE.Color("#c084fc"),       // Nebula Violet Lotus
+                butterfly: new THREE.Color("#7dd3fc"),    // Diamond Sky Wing
+                flame: new THREE.Color("#fde047"),        // Beacon Star Flame
+                bgHex: "#02050d",
+                cssPrimary: "#38bdf8",
+                cssSecondary: "#e0f2fe"
+            },
+            {
+                name: "20 • 11 • Lưu Ly Cổ Điển",
+                primary: new THREE.Color("#10b981"),      // Emerald Jade Wisdom
+                secondary: new THREE.Color("#fbbf24"),    // Royal Golden Ink
+                accent: new THREE.Color("#34d399"),       // Luminous Celadon
+                butterfly: new THREE.Color("#fde68a"),    // Gold Leaf Wing
+                flame: new THREE.Color("#f59e0b"),        // Amber Lantern Flame
+                bgHex: "#010806",
+                cssPrimary: "#10b981",
+                cssSecondary: "#fbbf24"
+            },
+            {
+                name: "20 • 11 • Tím Huế Hoài Niệm",
+                primary: new THREE.Color("#a855f7"),      // Nostalgic Royal Purple
+                secondary: new THREE.Color("#fda4af"),    // Peach Blossom Silk
+                accent: new THREE.Color("#fbbf24"),       // Starlight Gold
+                butterfly: new THREE.Color("#f5d0fe"),    // Orchid Crystal Wing
+                flame: new THREE.Color("#fde047"),        // Warm Candlelight
+                bgHex: "#05010c",
+                cssPrimary: "#a855f7",
+                cssSecondary: "#fda4af"
+            }
+        ];
+
+        /* ==========================================================================
+           1B. FIVE DEEPLY POETIC VIETNAMESE 20-11 LETTERS (CYCLE WITH [TAB])
+           ========================================================================== */
+        const LETTERS_20_11 = [
+            {
+                badge: "✦ Tâm Thư Tri Ân 20-11 • Bụi Phấn Hóa Sao Trời (1/5) ✦",
+                title: "Kính Gửi Người Gieo Hạt Ánh Sáng",
+                body: `
+                    <p>Có những hạt bụi phấn rơi xuống bục giảng năm nào nhưng chưa bao giờ tan biến — chúng đã lặng lẽ hóa thành hàng vạn vì sao dẫn lối cho chúng em đi qua những vùng trời rộng lớn của cuộc đời.</p>
+                    <p>Nhân ngày Nhà Giáo Việt Nam 20-11, từ tận đáy lòng, em xin gửi tới Thầy Cô ngàn đóa hoa tri ân rực rỡ nhất. Chúc Thầy Cô luôn dồi dào sức khỏe, giữ mãi ngọn lửa nhiệt huyết ấm áp và bình yên trên từng chuyến đò tri thức.</p>
+                `,
+                sign: "— Trọn Đời Khắc Ghi Công Ơn Thầy Cô —"
+            },
+            {
+                badge: "✦ Tâm Thư Tri Ân 20-11 • Người Lái Đò Thầm Lặng (2/5) ✦",
+                title: "Bến Đò Năm Tháng & Dòng Sông Tri Thức",
+                body: `
+                    <p>Thời gian như dòng sông chảy mãi không ngừng, bao thế hệ học trò đã sang sông và bay đến những chân trời mới, chỉ có bóng dáng Thầy Cô vẫn kiên nhẫn nơi bến đò xưa với mái tóc pha sương vì bụi phấn.</p>
+                    <p>Tháng Mười Một về mang theo gió heo may và niềm xúc động nghẹn ngào. Cảm ơn Thầy Cô đã kiên nhẫn bao dung cho những vụng về tuổi trẻ, chắp cho chúng em đôi cánh của ước mơ và nhân cách làm người.</p>
+                `,
+                sign: "— Kính Chúc Thầy Cô Ngày 20-11 Trọn Vẹn Hạnh Phúc —"
+            },
+            {
+                badge: "✦ Tâm Thư Tri Ân 20-11 • Trang Sách Mở Ra Bầu Trời (3/5) ✦",
+                title: "Những Trang Sách Lấp Lánh Ánh Sao",
+                body: `
+                    <p>Mỗi bài giảng của Thầy Cô không chỉ là kiến thức trong trang vở, mà là một cánh cửa diệu kỳ mở ra cả ngân hà bao la của lòng nhân ái, sự tử tế và niềm tin vào chính bản thân mình.</p>
+                    <p>Dù mai này đi đâu về đâu giữa dòng đời vội vã, ánh mắt hiền từ và giọng nói ấm áp của Thầy Cô vẫn luôn là ngọn hải đăng dịu dàng soi sáng tâm hồn chúng em. Kính chúc Thầy Cô mãi an nhiên và rạng rỡ!</p>
+                `,
+                sign: "— Tri Ân Người Thắp Lửa Ước Mơ —"
+            },
+            {
+                badge: "✦ Tâm Thư Tri Ân 20-11 • Tâm Tư Học Trò (4/5) ✦",
+                title: "Gửi Lại Mùa Thu Nơi Khung Cửa Lớp",
+                body: `
+                    <p>Có những điều khi còn ngồi trên ghế nhà trường chúng em chưa từng kịp nói, để rồi khi trưởng thành mới thấu hiểu hết sự hy sinh thầm lặng đằng sau từng trang giáo án thức trắng đêm của Thầy Cô.</p>
+                    <p>Nhân ngày hội hiến chương 20-11, em xin gửi vào những cánh hoa ánh sáng này lòng biết ơn sâu sắc nhất. Mong mỗi ngày đến trường của Thầy Cô đều ngập tràn tiếng cười và niềm tự hào.</p>
+                `,
+                sign: "— Thương Nhớ Và Biết Ơn Thầy Cô Thật Nhiều —"
+            },
+            {
+                badge: "✦ Tâm Thư Tri Ân 20-11 • Hoa Đăng Ước Nguyện (5/5) ✦",
+                title: "Ngàn Hoa Đăng Thắp Sáng Lời Tri Ân",
+                body: `
+                    <p>Đêm nay, giữa vũ trụ hoa và những cánh bướm pha lê lấp lánh, em xin thắp lên ngọn hoa đăng của lòng kính trọng gửi đến những người Thầy, người Cô đáng kính nhất trong cuộc đời mình.</p>
+                    <p>Cầu chúc Thầy Cô luôn mạnh khỏe, hạnh phúc viên mãn và mãi là điểm tựa tinh thần cao quý, dẫn dắt thêm biết bao thế hệ chạm tới bến bờ của tri thức và yêu thương.</p>
+                `,
+                sign: "— Mãi Tự Hào Là Học Trò Của Thầy Cô —"
+            }
+        ];
+        let currentLetterIdx = 0;
+
+        let currentPaletteIdx = 0;
+        let activeColors = {
+            primary: CHROMATIC_PALETTES[0].primary.clone(),
+            secondary: CHROMATIC_PALETTES[0].secondary.clone(),
+            accent: CHROMATIC_PALETTES[0].accent.clone(),
+            butterfly: CHROMATIC_PALETTES[0].butterfly.clone(),
+            flame: CHROMATIC_PALETTES[0].flame.clone()
+        };
+        let targetColors = {
+            primary: CHROMATIC_PALETTES[0].primary.clone(),
+            secondary: CHROMATIC_PALETTES[0].secondary.clone(),
+            accent: CHROMATIC_PALETTES[0].accent.clone(),
+            butterfly: CHROMATIC_PALETTES[0].butterfly.clone(),
+            flame: CHROMATIC_PALETTES[0].flame.clone()
+        };
+
+        /* ==========================================================================
+           2. GENERATIVE WEB AUDIO ENGINE (CRYSTAL HARP + KALIMBA + WIND CHIME)
+           ========================================================================== */
+        class CosmicAudioEngine {
+            constructor() {
+                this.ctx = null;
+                this.isInitialized = false;
+                // Nostalgic Vietnamese Pentatonic / Lydian Harp Scale ("Bụi Phấn" & Celestial Chimes)
+                this.scale = [
+                    261.63, 293.66, 329.63, 392.00, 440.00,
+                    523.25, 587.33, 659.25, 783.99, 880.00,
+                    1046.50, 1174.66, 1318.51, 1567.98
+                ];
+                // Gentle nostalgic melody motif inspired by "Bụi Phấn"
+                this.melodyNotes = [
+                    392.00, 523.25, 659.25, 587.33, 523.25, 440.00,
+                    392.00, 440.00, 523.25, 587.33, 659.25, 783.99,
+                    659.25, 587.33, 523.25, 440.00, 523.25, 392.00
+                ];
+                this.melodyStep = 0;
+                this.lastPluckTime = 0;
+            }
+
+            init() {
+                if (this.isInitialized) {
+                    if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+                    return;
+                }
+                try {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioCtx();
+                    this.isInitialized = true;
+                } catch (e) {
+                    // Audio not supported
+                }
+            }
+
+            pluckCrystalNote(freqOverride = null, volume = 0.075, duration = 2.1) {
+                if (!this.isInitialized) return;
+                const now = this.ctx.currentTime;
+                const freq = freqOverride || this.scale[Math.floor(Math.random() * this.scale.length)];
+
+                const osc1 = this.ctx.createOscillator();
+                const osc2 = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(freq, now);
+
+                osc2.type = 'triangle';
+                osc2.frequency.setValueAtTime(freq * 2, now);
+
+                const subGain = this.ctx.createGain();
+                subGain.gain.setValueAtTime(volume * 0.22, now);
+                subGain.gain.exponentialRampToValueAtTime(0.0001, now + duration * 0.45);
+
+                gain.gain.setValueAtTime(0.0001, now);
+                gain.gain.linearRampToValueAtTime(volume, now + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+                osc1.connect(gain);
+                osc2.connect(subGain);
+                subGain.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc1.start(now);
+                osc2.start(now);
+                osc1.stop(now + duration);
+                osc2.stop(now + duration);
+            }
+
+            playNextMelodyNote(volume = 0.07) {
+                this.init();
+                const now = performance.now();
+                if (now - this.lastPluckTime < 210) return;
+                this.lastPluckTime = now;
+
+                const freq = this.melodyNotes[this.melodyStep];
+                this.melodyStep = (this.melodyStep + 1) % this.melodyNotes.length;
+                this.pluckCrystalNote(freq, volume, 2.3);
+            }
+
+            updateChargeSound(chargeRatio) {
+                this.init();
+                if (!this.isInitialized) return;
+                if (chargeRatio > 0.05 && Math.random() < 0.34) {
+                    const idx = Math.min(
+                        this.scale.length - 1,
+                        Math.floor(chargeRatio * this.scale.length)
+                    );
+                    this.pluckCrystalNote(this.scale[idx], 0.045 + chargeRatio * 0.055, 1.35);
+                }
+            }
+
+            playCelestialChord(baseFreq = 261.63) {
+                this.init();
+                if (!this.isInitialized) return;
+                const ratios = [1, 1.25, 1.5, 1.875, 2, 2.5, 3];
+                ratios.forEach((r, idx) => {
+                    setTimeout(() => {
+                        this.pluckCrystalNote(baseFreq * r, 0.08, 3.0);
+                    }, idx * 70);
+                });
+            }
+        }
+
+        const audioEngine = new CosmicAudioEngine();
+
+        /* ==========================================================================
+           3. THREE.JS 3D SCENE, CAMERA & INTERACTION STATE
+           ========================================================================== */
+        const IS_TOUCH = window.matchMedia('(pointer: coarse)').matches;
+        let curDPR = Math.min(window.devicePixelRatio || 1, IS_TOUCH ? 1.5 : 2);
+        let fitBoost = 1;
+        const container = document.getElementById('webgl-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x03020a, 0.0075);
+
+        const camera = new THREE.PerspectiveCamera(54, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 11, 46);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: !IS_TOUCH, powerPreference: "high-performance" });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(curDPR);
+        renderer.setClearColor(0x03020a, 1);
+        container.appendChild(renderer.domElement);
+
+        // Master 3D Sculpture Group
+        const universeGroup = new THREE.Group();
+        scene.add(universeGroup);
+
+        // Interactive Camera & Morph State
+        const interaction = {
+            mouseX: 0,
+            mouseY: 0,
+            worldMouse: new THREE.Vector3(0, 0, 12),
+            isHolding: false,
+            isDraggingOrbit: false,
+            pointerDown: false,
+            dragDistance: 0,
+            holdTimer: null,
+            prevPointerX: 0,
+            prevPointerY: 0,
+            orbitYaw: 0,
+            orbitPitch: 0.22,
+            orbitVelYaw: 0,
+            orbitVelPitch: 0,
+            cursorX: window.innerWidth / 2,
+            cursorY: window.innerHeight / 2,
+            cursorTargetX: window.innerWidth / 2,
+            cursorTargetY: window.innerHeight / 2,
+            cursorInitialized: false,
+            targetZoom: 46,
+            currentZoom: 46,
+            morphProgress: 0,      // 0 = Open 3D Book of Knowledge & Blooming Lotus, 1 = Celestial Boat & Fountain Pen Lantern
+            targetMorph: 0,
+            lockedBoatMode: false, // Stays in Boat & Pen Lantern mode once fully charged until double-click or hold release
+            supernovaBurst: 0,     // 0 -> 1 Sky Lantern & Golden Petal Supernova
+            shockwaveTime: -10.0,  // 3D spherical shockwave timer on Spacebar
+            holdStartTime: 0,
+            letterOpen: false
+        };
+
+        /* ==========================================================================
+           4. PROCEDURAL 3D PARTICLE SCULPTURE (14,000 BIOLUMINESCENT PARTICLES)
+              Morphing seamlessly between:
+              - TARGET A (Default): "Cuốn Sách Ngân Hà & Đóa Hoa Tri Thức"
+                  1) Grand Open 3D Book with arched pages, stacked page edges & golden text lines
+                  2) Blooming 3D Lotus / Rose of Knowledge rising from the open book spine
+                  3) Swirling Chalk-Stardust Vortex & Constellation Halo Rings
+              - TARGET B (Hold): "Bến Đò Ngân Hà & Ngọn Bút Hoa Đăng Tri Ân"
+                  1) Poetic 3D Wooden/Celestial Boat ("Con Đò Tri Thức") with curved hull, prow & canopy
+                  2) Majestic 3D Fountain Pen Nib & Glowing Wisdom Lantern ("Ngọn Bút / Hoa Đăng")
+                  3) Sinusoidal Galaxy River Waves ("Sóng Ngân Hà Đưa Đò")
+           ========================================================================== */
+        const PARTICLE_COUNT = 14000;
+        const particleGeometry = new THREE.BufferGeometry();
+
+        const posBookLotus = new Float32Array(PARTICLE_COUNT * 3);
+        const posBoatLantern = new Float32Array(PARTICLE_COUNT * 3);
+        const posSupernovaVel = new Float32Array(PARTICLE_COUNT * 3);
+        const aScale = new Float32Array(PARTICLE_COUNT);
+        const aColorMix = new Float32Array(PARTICLE_COUNT); // 0: primary, 0.45: accent lotus, 0.75: secondary, 1.0: flame/nib gold
+        const aPhase = new Float32Array(PARTICLE_COUNT);
+
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            const i3 = i * 3;
+            aPhase[i] = Math.random() * Math.PI * 2;
+            aScale[i] = Math.random() * 1.55 + 0.48;
+
+            // ==================================================================
+            // TARGET A: OPEN 3D BOOK OF KNOWLEDGE + BLOOMING LOTUS + GALAXY HALO
+            // ==================================================================
+            if (i < 6000) {
+                // 1) Grand Open 3D Book (Curved Left & Right Pages + Page Stack + Glowing Script Lines)
+                const idx = i;
+                const side = (idx % 2 === 0) ? 1 : -1;
+                // u: distance from central spine (0 -> 1), v: front-to-back page depth (-1 -> 1)
+                const isScriptLine = (idx % 5 === 0);
+                const u = isScriptLine
+                    ? (0.12 + (Math.floor(idx / 10) % 14) / 15.5)
+                    : Math.pow(Math.random(), 0.88);
+                const v = isScriptLine
+                    ? ((Math.floor(idx / 140) % 11) / 5.5 - 0.9) + (Math.random() - 0.5) * 0.03
+                    : (Math.random() * 2.0 - 1.0);
+
+                const pageWidth = 15.8;
+                const pageHeight = 11.2;
+
+                // Graceful open-book arch: rises out of the spine, then curves softly down at outer edge
+                const pageArch = Math.sin(u * Math.PI * 0.85) * 3.2 - Math.pow(u, 1.7) * 1.85;
+                // Layered page stack thickness near outer edges
+                const pageStackThickness = (idx % 7 === 0) ? -Math.random() * 1.35 : (Math.random() - 0.5) * 0.22;
+
+                const bx = side * (u * pageWidth);
+                const by = -6.2 + pageArch + pageStackThickness + v * 0.18;
+                const bz = v * pageHeight;
+
+                // Slight tilt toward the viewer so the open pages are immediately recognizable
+                const tiltAngle = 0.28;
+                const cosT = Math.cos(tiltAngle);
+                const sinT = Math.sin(tiltAngle);
+
+                posBookLotus[i3]     = bx;
+                posBookLotus[i3 + 1] = by * cosT - bz * sinT;
+                posBookLotus[i3 + 2] = by * sinT + bz * cosT;
+
+                // Highlight golden poetic lines and outer page borders
+                aColorMix[i] = (isScriptLine || u > 0.93) ? 0.78 : 0.12;
+            } else if (i < 10400) {
+                // 2) Blooming 3D Sacred Lotus / Flower of Knowledge rising above the Book Spine
+                const idx = i - 6000;
+                const ratio = idx / 4400;
+                // 3 concentric tiers of sacred lotus petals (Inner bud, Middle bloom, Outer open petals)
+                const tier = idx % 3;
+                const petalCount = (tier === 0) ? 8 : (tier === 1 ? 12 : 16);
+                const theta = ratio * Math.PI * 28;
+                const v = Math.pow(Math.random(), 0.72); // 0 (base) -> 1 (petal tip)
+
+                const petalShape = Math.pow(Math.abs(Math.sin(theta * (petalCount * 0.5))), 0.65);
+                const maxRadius = (tier === 0) ? 3.8 : (tier === 1 ? 6.8 : 9.8);
+                const r = v * maxRadius * (0.35 + 0.65 * petalShape);
+
+                // Petals cup upward gracefully
+                const petalCupY = Math.pow(v, 1.25) * ((tier === 0) ? 6.4 : (tier === 1 ? 5.2 : 3.6))
+                                + petalShape * v * 1.4;
+
+                posBookLotus[i3]     = Math.cos(theta) * r;
+                posBookLotus[i3 + 1] = -2.2 + petalCupY;
+                posBookLotus[i3 + 2] = Math.sin(theta) * r;
+
+                // Lotus tips glow with warm golden-rose accent
+                aColorMix[i] = 0.35 + v * 0.55;
+            } else {
+                // 3) Swirling Chalk-Stardust Vortex & Orbital Constellation Rings emerging from the Book
+                const idx = i - 10400;
+                const ratio = idx / (PARTICLE_COUNT - 10400);
+                const spiralAngle = ratio * Math.PI * 18;
+                const strand = idx % 3;
+
+                if (strand < 2) {
+                    // Ascending double-helix stardust ribbons from book pages into the cosmos
+                    const radius = 5.5 + ratio * 19.5 + (Math.random() - 0.5) * 1.8;
+                    const y = -4.5 + ratio * 18.5 + Math.sin(spiralAngle * 2.0) * 1.5;
+                    const offset = strand * Math.PI;
+                    posBookLotus[i3]     = Math.cos(spiralAngle + offset) * radius;
+                    posBookLotus[i3 + 1] = y;
+                    posBookLotus[i3 + 2] = Math.sin(spiralAngle + offset) * radius;
+                    aColorMix[i] = 0.72 + Math.random() * 0.25;
+                } else {
+                    // Tilted Astrolabe Halo Ring of Knowledge
+                    const ringAngle = Math.random() * Math.PI * 2;
+                    const ringR = 19.5 + (Math.random() - 0.5) * 1.4;
+                    const rx = Math.cos(ringAngle) * ringR;
+                    const rz = Math.sin(ringAngle) * ringR;
+                    const ry = Math.sin(ringAngle) * 5.2 + 2.0;
+                    posBookLotus[i3]     = rx;
+                    posBookLotus[i3 + 1] = ry;
+                    posBookLotus[i3 + 2] = rz;
+                    aColorMix[i] = 0.85;
+                }
+            }
+
+            // ==================================================================
+            // TARGET B: CELESTIAL BOAT OF KNOWLEDGE ("CON ĐÒ TRI THỨC")
+            //           + LUMINOUS FOUNTAIN PEN / LANTERN + GALAXY WAVES
+            // ==================================================================
+            if (i < 5600) {
+                // 1) "Con Đò Tri Thức" - Traditional Poetic Vietnamese Wooden Boat Hull, Prow & Canopy
+                const idx = i;
+                // Normalized length along the boat hull: s in [-1, 1]
+                const s = (Math.random() * 2.0 - 1.0);
+                const boatHalfLength = 16.5;
+                const x = s * boatHalfLength;
+
+                // Boat width tapers smoothly to 0 at bow (s = 1) and stern (s = -1)
+                const widthEnvelope = Math.max(0.02, Math.cos(s * Math.PI * 0.5));
+                const maxHalfBeam = 4.6 * Math.pow(widthEnvelope, 0.78);
+                // Sweeping upward curve at bow and stern ("Mũi đò cong vút")
+                const sheerCurveY = Math.pow(Math.abs(s), 2.15) * 4.8;
+
+                if (idx < 4200) {
+                    // Boat Hull Planks & Gunwale Rim
+                    const u = (Math.random() * 2.0 - 1.0); // cross-section from port (-1) to starboard (+1)
+                    const isGunwale = (idx % 6 === 0);
+                    const crossU = isGunwale ? (u >= 0 ? 1.0 : -1.0) : u;
+                    const z = crossU * maxHalfBeam;
+                    // Hull cross-section depth
+                    const hullDepth = (crossU * crossU) * 2.85 * widthEnvelope;
+                    const y = -6.8 + sheerCurveY + hullDepth;
+
+                    posBoatLantern[i3]     = x;
+                    posBoatLantern[i3 + 1] = y;
+                    posBoatLantern[i3 + 2] = z;
+                } else {
+                    // Arched Bamboo Canopy ("Mui Đò") & Gentle Oar ("Mái Chèo")
+                    if (idx < 5200 && Math.abs(s) < 0.42) {
+                        const canopyS = (Math.random() * 2.0 - 1.0) * 0.4;
+                        const canopyX = canopyS * boatHalfLength;
+                        const archAngle = (Math.random() - 0.5) * Math.PI;
+                        const canopyW = 4.1 * Math.cos(canopyS * Math.PI * 0.5);
+                        posBoatLantern[i3]     = canopyX;
+                        posBoatLantern[i3 + 1] = -4.2 + Math.cos(archAngle) * 2.9;
+                        posBoatLantern[i3 + 2] = Math.sin(archAngle) * canopyW;
+                    } else {
+                        // Poetic Oar extending into the stardust river
+                        const oarT = Math.random();
+                        posBoatLantern[i3]     = -5.5 - oarT * 8.5;
+                        posBoatLantern[i3 + 1] = -4.2 - oarT * 3.6;
+                        posBoatLantern[i3 + 2] = 2.8 + oarT * 6.5;
+                    }
+                }
+            } else if (i < 9800) {
+                // 2) "Ngọn Bút Tri Thức & Hoa Đăng Tri Ân" hovering majestically above the Boat
+                const idx = i - 5600;
+                if (idx < 2800) {
+                    // Sculpted Fountain Pen Nib ("Ngòi Bút Vàng Tri Thức") + Slit & Breather Hole
+                    const v = Math.random(); // 0 (base collar) -> 1 (sharp golden nib tip at top)
+                    const nibHeight = 10.5;
+                    // Nib silhouette: widens from collar, then tapers to a fine point
+                    const nibWidth = (v < 0.45)
+                        ? (1.6 + (v / 0.45) * 1.9)
+                        : (3.5 * (1.0 - (v - 0.45) / 0.55));
+                    const side = (idx % 2 === 0) ? 1 : -1;
+                    const u = (idx % 9 === 0) ? 0.02 : Math.pow(Math.random(), 0.7); // central ink slit highlight
+                    const px = side * u * nibWidth;
+                    const py = 0.2 + v * nibHeight;
+                    const pz = Math.cos(u * Math.PI * 0.5) * (1.35 * (1.0 - v * 0.65));
+
+                    // Tilt the Fountain Pen Nib gracefully at a 25-degree writing angle
+                    const penTilt = -0.32;
+                    posBoatLantern[i3]     = px * Math.cos(penTilt) - (py - 4.0) * Math.sin(penTilt);
+                    posBoatLantern[i3 + 1] = px * Math.sin(penTilt) + (py - 4.0) * Math.cos(penTilt) + 4.2;
+                    posBoatLantern[i3 + 2] = pz;
+                } else {
+                    // Blazing Plasma Lantern Flame / Beacon of Wisdom at the Tip of the Pen
+                    const u = Math.random();
+                    const theta = Math.random() * Math.PI * 2;
+                    const flameH = u * 5.2;
+                    const flameR = Math.sin(u * Math.PI) * (1.65 * (1.0 - u * 0.4));
+                    posBoatLantern[i3]     = 2.6 + Math.cos(theta) * flameR;
+                    posBoatLantern[i3 + 1] = 10.2 + flameH;
+                    posBoatLantern[i3 + 2] = Math.sin(theta) * flameR;
+                    aColorMix[i] = 1.0; // Pure Golden Lantern Flame Channel
+                    aScale[i] = 2.15;
+                }
+            } else {
+                // 3) "Sóng Ngân Hà Đưa Đò" - Flowing Sinusoidal River of Stardust Waves beneath the Boat
+                const idx = i - 9800;
+                const ratio = idx / (PARTICLE_COUNT - 9800);
+                const waveX = (Math.random() * 2.0 - 1.0) * 26.0;
+                const waveZ = (Math.random() * 2.0 - 1.0) * 18.0;
+                const waveY = -8.2 + Math.sin(waveX * 0.35 + waveZ * 0.25) * 1.35
+                            + Math.cos(waveX * 0.2 - waveZ * 0.4) * 0.85;
+
+                posBoatLantern[i3]     = waveX;
+                posBoatLantern[i3 + 1] = waveY;
+                posBoatLantern[i3 + 2] = waveZ;
+                aColorMix[i] = 0.68 + 0.28 * ratio;
+            }
+
+            // ==================================================================
+            // SUPERNOVA & RISING SKY LANTERN VECTORS (DOUBLE CLICK CELEBRATION)
+            // ==================================================================
+            const phi = Math.acos(2 * Math.random() - 1);
+            const lam = Math.random() * Math.PI * 2;
+            const speed = 16 + Math.random() * 36;
+            // Bias slightly upward like thousands of sky lanterns ("Hoa đăng bay lên trời")
+            posSupernovaVel[i3]     = Math.sin(phi) * Math.cos(lam) * speed;
+            posSupernovaVel[i3 + 1] = Math.abs(Math.sin(phi) * Math.sin(lam)) * speed * 1.15 + 4.0;
+            posSupernovaVel[i3 + 2] = Math.cos(phi) * speed;
+        }
+
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(posBookLotus, 3));
+        particleGeometry.setAttribute('aTargetCake', new THREE.BufferAttribute(posBoatLantern, 3));
+        particleGeometry.setAttribute('aSupernovaVel', new THREE.BufferAttribute(posSupernovaVel, 3));
+        particleGeometry.setAttribute('aScale', new THREE.BufferAttribute(aScale, 1));
+        particleGeometry.setAttribute('aColorMix', new THREE.BufferAttribute(aColorMix, 1));
+        particleGeometry.setAttribute('aPhase', new THREE.BufferAttribute(aPhase, 1));
+
+        // Custom GLSL Shader for 14,000 Particles: Book <-> Boat Morphing + 3D Mouse Swirl + Spacebar Shockwave
+        const particleShaderMaterial = new THREE.ShaderMaterial({
+            transparent: true,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+            uniforms: {
+                uTime: { value: 0 },
+                uMorph: { value: 0 },          // 0: Open Book & Lotus, 1: Celestial Boat & Pen Lantern
+                uVortexCharge: { value: 0 },   // Swirl intensity during hold
+                uSupernova: { value: 0 },      // Sky Lantern Supernova burst
+                uShockwaveTime: { value: -10 },// Spacebar spherical shockwave timer
+                uMouse3D: { value: new THREE.Vector3(0, 0, 0) },
+                uPixelRatio: { value: curDPR },
+                uColorPrimary: { value: activeColors.primary },
+                uColorSecondary: { value: activeColors.secondary },
+                uColorAccent: { value: activeColors.accent },
+                uColorFlame: { value: activeColors.flame }
+            },
+            vertexShader: `
+                attribute vec3 aTargetCake;
+                attribute vec3 aSupernovaVel;
+                attribute float aScale;
+                attribute float aColorMix;
+                attribute float aPhase;
+
+                uniform float uTime;
+                uniform float uMorph;
+                uniform float uVortexCharge;
+                uniform float uSupernova;
+                uniform float uShockwaveTime;
+                uniform vec3 uMouse3D;
+                uniform float uPixelRatio;
+                uniform vec3 uColorPrimary;
+                uniform vec3 uColorSecondary;
+                uniform vec3 uColorAccent;
+                uniform vec3 uColorFlame;
+
+                varying vec3 vColor;
+                varying float vAlpha;
+
+                void main() {
+                    // Smooth interpolation between Open Book of Knowledge (0) and Celestial Boat & Pen (1)
+                    float m = smoothstep(0.0, 1.0, uMorph);
+                    vec3 basePos = mix(position, aTargetCake, m);
+
+                    // Gentle page-breathing / river-wave undulation
+                    float waveMotion = sin(uTime * 1.65 + basePos.x * 0.22 + aPhase) * 0.26;
+                    basePos.y += waveMotion;
+
+                    // Flickering golden plasma flame at the tip of the Fountain Pen Lantern
+                    if (aColorMix > 0.95 && m > 0.4) {
+                        basePos.x += sin(uTime * 8.5 + basePos.y * 1.8) * 0.28 * m;
+                        basePos.z += cos(uTime * 7.2 + basePos.y * 1.8) * 0.28 * m;
+                    }
+
+                    // Interactive 3D Mouse Chalk-Stardust Swirl & Gentle Levitation
+                    vec3 toMouse = basePos - uMouse3D;
+                    float mouseDist = length(toMouse);
+                    if (mouseDist < 9.5) {
+                        float influence = pow(1.0 - mouseDist / 9.5, 2.0);
+                        basePos += normalize(toMouse + vec3(0.001)) * influence * 2.4;
+                        basePos.y += influence * 1.35;
+                    }
+
+                    // Swirling Galaxy Vortex when holding mouse/touch to turn pages & crystallize
+                    if (uVortexCharge > 0.001) {
+                        float angle = uVortexCharge * 3.8 * (1.0 / (length(basePos.xz) * 0.07 + 0.55));
+                        float s = sin(angle);
+                        float c = cos(angle);
+                        mat2 rot = mat2(c, -s, s, c);
+                        basePos.xz = rot * basePos.xz;
+                        basePos *= (1.0 - uVortexCharge * 0.14);
+                    }
+
+                    // 3D Spherical Shockwave Ripple when pressing [SPACE]
+                    float shockAge = uTime - uShockwaveTime;
+                    float shockGlow = 0.0;
+                    if (shockAge > 0.0 && shockAge < 2.2) {
+                        float waveRadius = shockAge * 26.0;
+                        float distFromCenter = length(basePos);
+                        float band = abs(distFromCenter - waveRadius);
+                        if (band < 4.5) {
+                            float pulse = smoothstep(4.5, 0.0, band) * (1.0 - shockAge / 2.2);
+                            basePos += normalize(basePos + vec3(0.001)) * pulse * 3.2;
+                            shockGlow = pulse;
+                        }
+                    }
+
+                    // Sky Lantern & Petal Supernova Burst on Double Click
+                    if (uSupernova > 0.001) {
+                        basePos += aSupernovaVel * pow(uSupernova, 0.85);
+                    }
+
+                    vec4 mvPosition = modelViewMatrix * vec4(basePos, 1.0);
+                    gl_Position = projectionMatrix * mvPosition;
+
+                    // Dynamic twinkle & perspective size attenuation
+                    float twinkle = 0.76 + 0.44 * sin(uTime * 3.0 + aPhase * 3.0);
+                    float flameBoost = (aColorMix > 0.95) ? (1.0 + m * 0.9) : 1.0;
+                    gl_PointSize = aScale * twinkle * flameBoost * (1.0 + shockGlow * 0.8) * uPixelRatio * (168.0 / -mvPosition.z);
+
+                    // Multi-channel luxury 20-11 color blending
+                    vec3 col = mix(uColorPrimary, uColorAccent, smoothstep(0.15, 0.55, aColorMix));
+                    col = mix(col, uColorSecondary, smoothstep(0.55, 0.88, aColorMix));
+                    if (aColorMix > 0.92) {
+                        col = mix(col, uColorFlame, m);
+                    }
+                    // Radiant white-gold core during vortex charge, shockwave, or supernova
+                    col = mix(col, vec3(1.0, 0.98, 0.90), uVortexCharge * 0.4 + shockGlow * 0.65 + uSupernova * 0.45);
+
+                    vColor = col;
+                    vAlpha = (0.7 + 0.3 * sin(uTime * 2.2 + aPhase)) * (1.0 - uSupernova * 0.32);
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vColor;
+                varying float vAlpha;
+
+                void main() {
+                    vec2 uv = gl_PointCoord - vec2(0.5);
+                    float dist = length(uv);
+                    if (dist > 0.5) discard;
+
+                    float core = smoothstep(0.5, 0.0, dist);
+                    float halo = pow(core, 2.1);
+                    vec3 finalColor = vColor + vec3(0.48) * pow(core, 4.8);
+
+                    gl_FragColor = vec4(finalColor, halo * vAlpha);
+                }
+            `
+        });
+
+        const mainParticleSystem = new THREE.Points(particleGeometry, particleShaderMaterial);
+        universeGroup.add(mainParticleSystem);
+
+        /* ==========================================================================
+           5. 3D HOLOGRAPHIC CRYSTAL BUTTERFLIES & FLOATING GOLDEN LOTUS PETALS
+           ========================================================================== */
+        const BUTTERFLY_COUNT = 30;
+        const butterflies = [];
+
+        // Custom Wing Geometry (4 vertices forming Left & Right hinged wings)
+        function createButterflyGeometry() {
+            const geom = new THREE.BufferGeometry();
+            const vertices = new Float32Array([
+                // Left Wing (2 triangles)
+                0, 0, 0,   -1.35,  0.85,  0.4,   -0.95, -0.75, -0.3,
+                0, 0, 0,   -0.95, -0.75, -0.3,   -0.25, -1.05, -0.6,
+                // Right Wing (2 triangles)
+                0, 0, 0,    1.35,  0.85,  0.4,    0.95, -0.75, -0.3,
+                0, 0, 0,    0.95, -0.75, -0.3,    0.25, -1.05, -0.6
+            ]);
+            geom.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+            return geom;
+        }
+
+        const butterflyBaseGeom = createButterflyGeometry();
+        const butterflyShaderMat = new THREE.ShaderMaterial({
+            transparent: true,
+            side: THREE.DoubleSide,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+            uniforms: {
+                uTime: { value: 0 },
+                uFlapOffset: { value: 0 },
+                uWingColor: { value: activeColors.butterfly },
+                uAccentColor: { value: activeColors.primary }
+            },
+            vertexShader: `
+                uniform float uTime;
+                uniform float uFlapOffset;
+                varying float vWingDist;
+
+                void main() {
+                    vec3 pos = position;
+                    vWingDist = abs(pos.x);
+                    // Flap wings along the X axis hinge
+                    float flapAngle = sin(uTime * 15.0 + uFlapOffset) * 0.95;
+                    if (abs(pos.x) > 0.05) {
+                        float side = sign(pos.x);
+                        float c = cos(flapAngle);
+                        float s = sin(flapAngle);
+                        float xNew = abs(pos.x) * c;
+                        float yNew = pos.y + abs(pos.x) * s;
+                        pos.x = side * xNew;
+                        pos.y = yNew;
+                    }
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform vec3 uWingColor;
+                uniform vec3 uAccentColor;
+                varying float vWingDist;
+
+                void main() {
+                    vec3 col = mix(vec3(1.0), mix(uWingColor, uAccentColor, vWingDist * 0.7), smoothstep(0.0, 1.2, vWingDist));
+                    float alpha = 0.85 - vWingDist * 0.25;
+                    gl_FragColor = vec4(col, alpha);
+                }
+            `
+        });
+
+        for (let i = 0; i < BUTTERFLY_COUNT; i++) {
+            const mat = butterflyShaderMat.clone();
+            mat.uniforms.uFlapOffset.value = Math.random() * Math.PI * 2;
+            mat.uniforms.uWingColor.value = activeColors.butterfly;
+            mat.uniforms.uAccentColor.value = activeColors.primary;
+
+            const mesh = new THREE.Mesh(butterflyBaseGeom, mat);
+            const scale = 0.55 + Math.random() * 0.55;
+            mesh.scale.set(scale, scale, scale);
+
+            const angle = Math.random() * Math.PI * 2;
+            const radius = 10 + Math.random() * 18;
+            mesh.position.set(
+                Math.cos(angle) * radius,
+                (Math.random() - 0.5) * 18,
+                Math.sin(angle) * radius
+            );
+
+            universeGroup.add(mesh);
+            butterflies.push({
+                mesh,
+                velocity: new THREE.Vector3(
+                    (Math.random() - 0.5) * 0.15,
+                    (Math.random() - 0.5) * 0.12,
+                    (Math.random() - 0.5) * 0.15
+                ),
+                orbitAngle: angle,
+                orbitRadius: radius,
+                orbitSpeed: 0.006 + Math.random() * 0.008,
+                verticalPhase: Math.random() * Math.PI * 2
+            });
+        }
+
+        /* ==========================================================================
+           6. 3D INSTANCED FLOATING GOLDEN LOTUS PETALS
+           ========================================================================== */
+        const PETAL_COUNT = 160;
+        const petalShape = new THREE.Shape();
+        petalShape.moveTo(0, 0);
+        petalShape.quadraticCurveTo(0.42, 0.35, 0, 1.05);
+        petalShape.quadraticCurveTo(-0.42, 0.35, 0, 0);
+
+        const petalGeom = new THREE.ShapeGeometry(petalShape);
+        const petalMaterial = new THREE.MeshBasicMaterial({
+            color: activeColors.accent,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.65,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+
+        const instancedPetals = new THREE.InstancedMesh(petalGeom, petalMaterial, PETAL_COUNT);
+        universeGroup.add(instancedPetals);
+
+        const petalDummy = new THREE.Object3D();
+        const petalData = [];
+
+        for (let i = 0; i < PETAL_COUNT; i++) {
+            const pos = new THREE.Vector3(
+                (Math.random() - 0.5) * 44,
+                (Math.random() - 0.5) * 38,
+                (Math.random() - 0.5) * 44
+            );
+            const rot = new THREE.Euler(
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+                Math.random() * Math.PI
+            );
+            const scale = 0.25 + Math.random() * 0.45;
+            petalData.push({
+                pos,
+                rot,
+                scale,
+                riseSpeed: 0.02 + Math.random() * 0.04,
+                swayPhase: Math.random() * Math.PI * 2,
+                rotSpeed: new THREE.Vector3(
+                    (Math.random() - 0.5) * 0.03,
+                    (Math.random() - 0.5) * 0.03,
+                    (Math.random() - 0.5) * 0.03
+                )
+            });
+        }
+
+        /* ==========================================================================
+           7. 3D ORBITING VIETNAMESE 20-11 POETIC WHISPERS (ULTRA SUBTLE)
+           ========================================================================== */
+        const WHISPER_TEXTS = [
+            "✦ Tri Ân Người Gieo Hạt Ánh Sáng ✦",
+            "✿ Bụi Phấn Hóa Sao Trời ✿",
+            "✧ Chuyến Đò Tri Thức Ngàn Năm ✧",
+            "❀ Kính Chúc Thầy Cô 20 • 11 Hạnh Phúc ❀"
+        ];
+        const whispersContainer = document.getElementById('whispers-container');
+        const whisperNodes = WHISPER_TEXTS.map((text, idx) => {
+            const el = document.createElement('div');
+            el.className = 'floating-whisper';
+            el.textContent = text;
+            whispersContainer.appendChild(el);
+            return {
+                el,
+                angle: (idx / WHISPER_TEXTS.length) * Math.PI * 2,
+                radius: 23.0,
+                yOffset: Math.sin(idx * 1.6) * 5.0
+            };
+        });
+
+        /* ==========================================================================
+           8. INTERACTION HANDLERS (HOLD MORPH, DOUBLE-CLICK LETTER, SPACEBAR, TAB)
+           ========================================================================== */
+        const raycaster = new THREE.Raycaster();
+        const normalizedMouse = new THREE.Vector2();
+        const planeZ = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+        const luxeCursor = document.getElementById('luxe-cursor');
+
+        window.addEventListener('pointermove', (e) => {
+            const nx = (e.clientX / window.innerWidth) * 2 - 1;
+            const ny = -(e.clientY / window.innerHeight) * 2 + 1;
+
+            // Follow with the luxury star cursor on precise pointers
+            if (e.pointerType === 'mouse') {
+                document.body.classList.add('has-luxe-cursor');
+                luxeCursor.classList.add('visible');
+                if (!interaction.cursorInitialized) {
+                    interaction.cursorX = e.clientX;
+                    interaction.cursorY = e.clientY;
+                    interaction.cursorInitialized = true;
+                }
+                interaction.cursorTargetX = e.clientX;
+                interaction.cursorTargetY = e.clientY;
+            }
+
+            // Drag to orbit a full 360 degrees around the Book / Celestial Boat
+            if (interaction.pointerDown && !interaction.letterOpen) {
+                const dx = e.clientX - interaction.prevPointerX;
+                const dy = e.clientY - interaction.prevPointerY;
+                interaction.dragDistance += Math.abs(dx) + Math.abs(dy);
+
+                // Small movement threshold keeps long-press morph separate from orbiting
+                if (!interaction.isDraggingOrbit && interaction.dragDistance > (IS_TOUCH ? 14 : 6)) {
+                    interaction.isDraggingOrbit = true;
+                    document.body.classList.add('is-dragging');
+                    if (!interaction.isHolding) clearTimeout(interaction.holdTimer);
+                }
+
+                if (interaction.isDraggingOrbit) {
+                    interaction.orbitYaw += dx * 0.0055;
+                    interaction.orbitPitch = Math.max(-0.55, Math.min(0.95, interaction.orbitPitch + dy * 0.004));
+                    interaction.orbitVelYaw = dx * 0.0055;
+                    interaction.orbitVelPitch = dy * 0.004;
+                }
+            }
+
+            interaction.prevPointerX = e.clientX;
+            interaction.prevPointerY = e.clientY;
+            interaction.mouseX = nx;
+            interaction.mouseY = ny;
+
+            // Project 3D cursor position for butterflies and stardust swirl
+            normalizedMouse.set(nx, ny);
+            raycaster.setFromCamera(normalizedMouse, camera);
+            raycaster.ray.intersectPlane(planeZ, interaction.worldMouse);
+            particleShaderMaterial.uniforms.uMouse3D.value.copy(interaction.worldMouse);
+
+            // Subtle crystal harp notes inspired by "Bụi Phấn" on graceful movement
+            if (Math.random() < 0.075 && !interaction.letterOpen) {
+                audioEngine.playNextMelodyNote(0.032);
+            }
+        });
+
+        window.addEventListener('pointerdown', (e) => {
+            audioEngine.init();
+            if (e.target.closest && e.target.closest('.ui-btn')) return;
+
+            // If 20-11 Letter is open, clicking outside the glass slab dissolves it back into stardust
+            if (interaction.letterOpen) {
+                const slab = document.getElementById('luminaSlab');
+                if (!slab.contains(e.target)) {
+                    dismissLoveLetter();
+                }
+                return;
+            }
+
+            if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+            interaction.pointerDown = true;
+            interaction.isDraggingOrbit = false;
+            interaction.dragDistance = 0;
+            interaction.orbitVelYaw = 0;
+            interaction.orbitVelPitch = 0;
+            interaction.prevPointerX = e.clientX;
+            interaction.prevPointerY = e.clientY;
+            interaction.holdStartTime = performance.now();
+
+            // Long-press (without dragging) toggles Book of Knowledge <-> Celestial Boat & Pen
+            clearTimeout(interaction.holdTimer);
+            interaction.holdTimer = setTimeout(() => {
+                if (!interaction.pointerDown || interaction.isDraggingOrbit || interaction.letterOpen) return;
+
+                interaction.isHolding = true;
+                interaction.targetMorph = interaction.lockedBoatMode ? 0.0 : 1.0;
+                document.getElementById('stateSubtitle').textContent = interaction.lockedBoatMode
+                    ? "Đang Mở Lại Trang Sách Ngân Hà & Đóa Hoa Tri Ân..."
+                    : "Đang Kết Tinh Con Đò Tri Thức & Ngọn Bút Hoa Đăng...";
+            }, 240);
+        });
+
+        function releasePointer() {
+            clearTimeout(interaction.holdTimer);
+            interaction.pointerDown = false;
+            document.body.classList.remove('is-dragging');
+
+            const wasHolding = interaction.isHolding;
+            interaction.isHolding = false;
+            interaction.isDraggingOrbit = false;
+
+            if (!wasHolding) return;
+
+            if (!interaction.lockedBoatMode && interaction.morphProgress > 0.82) {
+                interaction.lockedBoatMode = true;
+                interaction.targetMorph = 1.0;
+                document.getElementById('stateSubtitle').textContent =
+                    "Bến Đò Tri Thức & Ngọn Bút Hoa Đăng • Nhấn Đúp Mở Tâm Thư 20-11";
+                audioEngine.playCelestialChord(329.63);
+            } else if (interaction.lockedBoatMode && interaction.morphProgress < 0.25) {
+                interaction.lockedBoatMode = false;
+                interaction.targetMorph = 0.0;
+                document.getElementById('stateSubtitle').textContent =
+                    "Cuốn Sách Ngân Hà & Đóa Sen Tri Ân";
+                audioEngine.playCelestialChord(261.63);
+            } else {
+                interaction.targetMorph = interaction.lockedBoatMode ? 1.0 : 0.0;
+                document.getElementById('stateSubtitle').textContent = interaction.lockedBoatMode
+                    ? "Bến Đò Tri Thức & Ngọn Bút Hoa Đăng • Nhấn Đúp Mở Tâm Thư 20-11"
+                    : "Cuốn Sách Ngân Hà & Đóa Sen Tri Ân";
+            }
+        }
+
+        window.addEventListener('pointerup', releasePointer);
+        window.addEventListener('pointercancel', releasePointer);
+        window.addEventListener('blur', () => {
+            releasePointer();
+            luxeCursor.classList.remove('visible');
+        });
+        document.addEventListener('mouseleave', () => luxeCursor.classList.remove('visible'));
+
+        // Double Click / Double Tap anywhere triggers the Sky Lantern Supernova & 20-11 Gratitude Scroll
+        window.addEventListener('dblclick', () => {
+            if (interaction.letterOpen) return;
+            trigger2011SupernovaAndLetter();
+        });
+
+        // Smooth Zoom with Scroll Wheel
+        window.addEventListener('wheel', (e) => {
+            if (interaction.letterOpen) return;
+            interaction.targetZoom = Math.max(24, Math.min(72, interaction.targetZoom + e.deltaY * 0.025));
+        }, { passive: true });
+
+        // Keyboard shortcuts: [SPACE] Chromatic Shockwave, [TAB] Cycle 5 Poetic 20-11 Letters, [ESC] Close
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                triggerSpacebarChromaticShift();
+            } else if (e.code === 'Tab' && interaction.letterOpen) {
+                e.preventDefault();
+                cyclePoetic2011Letter();
+            } else if (e.code === 'Escape' && interaction.letterOpen) {
+                dismissLoveLetter();
+            }
+        });
+
+        function cyclePoetic2011Letter() {
+            currentLetterIdx = (currentLetterIdx + 1) % LETTERS_20_11.length;
+            const data = LETTERS_20_11[currentLetterIdx];
+
+            const badgeEl = document.getElementById('letterBadge');
+            const titleEl = document.getElementById('letterTitle');
+            const bodyEl = document.getElementById('letterBody');
+            const signEl = document.getElementById('letterSign');
+
+            titleEl.style.opacity = '0';
+            bodyEl.style.opacity = '0';
+            signEl.style.opacity = '0';
+
+            setTimeout(() => {
+                badgeEl.textContent = data.badge;
+                titleEl.textContent = data.title;
+                bodyEl.innerHTML = data.body;
+                signEl.textContent = data.sign;
+
+                titleEl.style.opacity = '1';
+                bodyEl.style.opacity = '1';
+                signEl.style.opacity = '1';
+            }, 220);
+
+            audioEngine.playCelestialChord(392.00);
+        }
+
+        function triggerSpacebarChromaticShift() {
+            currentPaletteIdx = (currentPaletteIdx + 1) % CHROMATIC_PALETTES.length;
+            const nextTheme = CHROMATIC_PALETTES[currentPaletteIdx];
+
+            targetColors.primary.copy(nextTheme.primary);
+            targetColors.secondary.copy(nextTheme.secondary);
+            targetColors.accent.copy(nextTheme.accent);
+            targetColors.butterfly.copy(nextTheme.butterfly);
+            targetColors.flame.copy(nextTheme.flame);
+
+            // Trigger 3D Spherical Shader Shockwave
+            particleShaderMaterial.uniforms.uShockwaveTime.value = clock.getElapsedTime();
+
+            // Update CSS variables & subtle header title
+            document.documentElement.style.setProperty('--glow-primary', nextTheme.cssPrimary);
+            document.documentElement.style.setProperty('--glow-secondary', nextTheme.cssSecondary);
+            document.documentElement.style.setProperty('--bg-deep', nextTheme.bgHex);
+            document.getElementById('paletteTitle').textContent = nextTheme.name;
+
+            // Trigger 2D Screen Shockwave Ring
+            const shockwave = document.getElementById('chromatic-shockwave');
+            shockwave.classList.remove('shockwave-active');
+            void shockwave.offsetWidth;
+            shockwave.classList.add('shockwave-active');
+
+            // Play celestial chord shift
+            const chordRoots = [261.63, 293.66, 329.63, 349.23, 392.00];
+            audioEngine.playCelestialChord(chordRoots[currentPaletteIdx]);
+        }
+
+        function trigger2011SupernovaAndLetter() {
+            if (interaction.letterOpen || interaction.supernovaBurst > 0) return;
+            audioEngine.playCelestialChord(523.25);
+            interaction.supernovaBurst = 0.01;
+
+            document.getElementById('stateSubtitle').textContent =
+                "✨ Ngàn Hoa Đăng Tri Ân Bay Lên Trời Đêm • Khai Mở Tâm Thư 20-11 ✨";
+
+            setTimeout(() => {
+                interaction.letterOpen = true;
+                document.getElementById('lumina-love-letter').classList.add('active');
+            }, 640);
+        }
+
+        function dismissLoveLetter() {
+            interaction.letterOpen = false;
+            document.getElementById('lumina-love-letter').classList.remove('active');
+            document.getElementById('stateSubtitle').textContent = interaction.lockedBoatMode
+                ? "Bến Đò Tri Thức & Ngọn Bút Hoa Đăng • Nhấn Đúp Mở Tâm Thư 20-11"
+                : "Cuốn Sách Ngân Hà & Đóa Sen Tri Ân";
+            audioEngine.pluckCrystalNote(659.25, 0.08, 1.8);
+        }
+
+        /* ==========================================================================
+           9. MAIN 60FPS WEBGL RENDER & PHYSICS LOOP
+           ========================================================================== */
+        const clock = new THREE.Clock();
+        const chargeIndicator = document.getElementById('charge-aura-indicator');
+        const tempProjVec = new THREE.Vector3();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            perfTick();
+
+            const elapsed = clock.getElapsedTime();
+
+            // Custom celestial star cursor easing
+            if (interaction.cursorInitialized) {
+                interaction.cursorX += (interaction.cursorTargetX - interaction.cursorX) * 0.36;
+                interaction.cursorY += (interaction.cursorTargetY - interaction.cursorY) * 0.36;
+                luxeCursor.style.transform =
+                    `translate3d(${interaction.cursorX.toFixed(2)}px, ${interaction.cursorY.toFixed(2)}px, 0) translate(-50%, -50%)`;
+            }
+
+            // 1. Smoothly interpolate chromatic palette shifts
+            activeColors.primary.lerp(targetColors.primary, 0.05);
+            activeColors.secondary.lerp(targetColors.secondary, 0.05);
+            activeColors.accent.lerp(targetColors.accent, 0.05);
+            activeColors.butterfly.lerp(targetColors.butterfly, 0.05);
+            activeColors.flame.lerp(targetColors.flame, 0.05);
+            petalMaterial.color.copy(activeColors.accent);
+
+            // 2. Update Morph Progress (Rose-Heart <-> 3D Floral Birthday Crown Cake)
+            const morphSpeed = interaction.isHolding ? 0.032 : 0.04;
+            interaction.morphProgress += (interaction.targetMorph - interaction.morphProgress) * morphSpeed;
+
+            // Vortex convergence energy while holding click
+            const targetVortex = interaction.isHolding ? Math.min(1.0, (performance.now() - interaction.holdStartTime) / 1600) : 0.0;
+            particleShaderMaterial.uniforms.uVortexCharge.value +=
+                (targetVortex - particleShaderMaterial.uniforms.uVortexCharge.value) * 0.08;
+
+            if (interaction.isHolding) {
+                audioEngine.updateChargeSound(particleShaderMaterial.uniforms.uVortexCharge.value);
+                chargeIndicator.style.opacity = (particleShaderMaterial.uniforms.uVortexCharge.value * 0.65).toFixed(2);
+                const ringScale = 1.25 - particleShaderMaterial.uniforms.uVortexCharge.value * 0.55;
+                chargeIndicator.style.transform = `translate(-50%, -50%) scale(${ringScale})`;
+            } else {
+                chargeIndicator.style.opacity = '0';
+            }
+
+            // 3. Supernova Explosion Decay
+            if (interaction.supernovaBurst > 0) {
+                interaction.supernovaBurst += 0.018;
+                if (interaction.supernovaBurst >= 1.0) {
+                    interaction.supernovaBurst = 0;
+                    interaction.targetMorph = 0.0;
+                }
+            }
+
+            // Update Particle Shader Uniforms
+            particleShaderMaterial.uniforms.uTime.value = elapsed;
+            particleShaderMaterial.uniforms.uMorph.value = interaction.morphProgress;
+            particleShaderMaterial.uniforms.uSupernova.value = interaction.supernovaBurst;
+
+            // 4. Update 3D Camera Parallax, Smooth 360 Orbit & Release Inertia
+            if (!interaction.isDraggingOrbit) {
+                interaction.orbitYaw += interaction.orbitVelYaw;
+                interaction.orbitPitch = Math.max(-0.55, Math.min(0.95, interaction.orbitPitch + interaction.orbitVelPitch));
+                interaction.orbitVelYaw *= 0.93;
+                interaction.orbitVelPitch *= 0.93;
+                if (Math.abs(interaction.orbitVelYaw) < 0.00005) interaction.orbitVelYaw = 0;
+                if (Math.abs(interaction.orbitVelPitch) < 0.00005) interaction.orbitVelPitch = 0;
+            }
+
+            interaction.currentZoom += (interaction.targetZoom - interaction.currentZoom) * 0.06;
+            const parallaxX = interaction.isDraggingOrbit ? 0 : interaction.mouseX * 0.35;
+            const parallaxY = interaction.isDraggingOrbit ? 0 : interaction.mouseY * 0.25;
+            const targetCamX = Math.sin(interaction.orbitYaw + parallaxX) * interaction.currentZoom * fitBoost;
+            const targetCamZ = Math.cos(interaction.orbitYaw + parallaxX) * interaction.currentZoom * fitBoost;
+            const targetCamY = (interaction.orbitPitch + parallaxY) * 24.0;
+
+            camera.position.x += (targetCamX - camera.position.x) * 0.06;
+            camera.position.y += (targetCamY - camera.position.y) * 0.06;
+            camera.position.z += (targetCamZ - camera.position.z) * 0.06;
+            camera.lookAt(0, 1.5, 0);
+
+            // Gentle rotation of the entire cosmic sculpture
+            universeGroup.rotation.y = elapsed * 0.14;
+
+            // 5. Update 3D Crystal Butterflies (Flapping + Following 3D Cursor)
+            for (let i = 0; i < BUTTERFLY_COUNT; i++) {
+                const b = butterflies[i];
+                b.mesh.material.uniforms.uTime.value = elapsed;
+
+                b.orbitAngle += b.orbitSpeed;
+                const idealPos = new THREE.Vector3(
+                    Math.cos(b.orbitAngle) * b.orbitRadius,
+                    Math.sin(elapsed * 1.5 + b.verticalPhase) * 6.5 + 1.5,
+                    Math.sin(b.orbitAngle) * b.orbitRadius
+                );
+
+                // Gently attract towards 3D cursor or vortex center when holding
+                if (interaction.isHolding) {
+                    idealPos.multiplyScalar(0.38);
+                } else {
+                    idealPos.lerp(interaction.worldMouse, 0.22);
+                }
+
+                const steer = idealPos.sub(b.mesh.position).multiplyScalar(0.035);
+                b.velocity.add(steer).multiplyScalar(0.92);
+                b.mesh.position.add(b.velocity);
+
+                // Orient butterfly along its flight vector
+                const lookTarget = b.mesh.position.clone().add(b.velocity);
+                b.mesh.lookAt(lookTarget);
+            }
+
+            // 6. Update Instanced 3D Silk Rose Petals
+            for (let i = 0; i < PETAL_COUNT; i++) {
+                const p = petalData[i];
+                p.pos.y += p.riseSpeed + interaction.supernovaBurst * 0.45;
+                p.pos.x += Math.sin(elapsed * 1.2 + p.swayPhase) * 0.03;
+                p.pos.z += Math.cos(elapsed * 1.1 + p.swayPhase) * 0.03;
+
+                if (p.pos.y > 22) p.pos.y = -18;
+
+                p.rot.x += p.rotSpeed.x;
+                p.rot.y += p.rotSpeed.y;
+                p.rot.z += p.rotSpeed.z;
+
+                petalDummy.position.copy(p.pos);
+                petalDummy.rotation.copy(p.rot);
+                petalDummy.scale.setScalar(p.scale);
+                petalDummy.updateMatrix();
+                instancedPetals.setMatrixAt(i, petalDummy.matrix);
+            }
+            instancedPetals.instanceMatrix.needsUpdate = true;
+
+            // 7. Update 3D-Projected Vietnamese Floating Whispers (Ultra Subtle)
+            const halfW = window.innerWidth / 2;
+            const halfH = window.innerHeight / 2;
+
+            for (let i = 0; i < whisperNodes.length; i++) {
+                const w = whisperNodes[i];
+                const a = w.angle + elapsed * 0.12;
+                tempProjVec.set(
+                    Math.cos(a) * w.radius,
+                    w.yOffset + Math.sin(elapsed * 0.8 + i) * 1.6,
+                    Math.sin(a) * w.radius
+                );
+                tempProjVec.applyMatrix4(universeGroup.matrixWorld);
+                tempProjVec.project(camera);
+
+                if (tempProjVec.z < 1.0) {
+                    const sx = (tempProjVec.x * halfW) + halfW;
+                    const sy = -(tempProjVec.y * halfH) + halfH;
+                    const depthScale = Math.max(0.55, Math.min(1.05, (1.0 - tempProjVec.z) * 11));
+                    const depthOpacity = Math.max(0.05, Math.min(0.46, (1.0 - tempProjVec.z) * 6.5)) * (interaction.letterOpen ? 0.08 : 1.0);
+
+                    w.el.style.transform = `translate3d(${sx}px, ${sy}px, 0) translate(-50%, -50%) scale(${depthScale.toFixed(2)})`;
+                    w.el.style.opacity = depthOpacity.toFixed(2);
+                } else {
+                    w.el.style.opacity = '0';
+                }
+            }
+
+            renderer.render(scene, camera);
+        }
+
+
+        /* ==========================================================================
+           MOBILE: chụm 2 ngón thu phóng, chạm đúp, nút bấm, tự giảm độ phân giải
+           ========================================================================== */
+        const touches = new Map();
+        let pinch0 = 0, zoom0 = 46, pinched = false, lastTap = { t: 0, x: 0, y: 0 };
+        const pinchDist = () => { const a = [...touches.values()]; return Math.hypot(a[0][0] - a[1][0], a[0][1] - a[1][1]) || 1; };
+
+        window.addEventListener('pointerdown', (e) => {
+            if (e.pointerType !== 'touch') return;
+            touches.set(e.pointerId, [e.clientX, e.clientY]);
+            if (touches.size === 2) {
+                releasePointer();
+                pinched = true; pinch0 = pinchDist(); zoom0 = interaction.targetZoom;
+                e.stopImmediatePropagation();
+            }
+        }, true);
+        window.addEventListener('pointermove', (e) => {
+            if (!touches.has(e.pointerId)) return;
+            touches.set(e.pointerId, [e.clientX, e.clientY]);
+            if (touches.size >= 2) {
+                if (pinch0 > 0) interaction.targetZoom = Math.max(24, Math.min(72, zoom0 * pinch0 / pinchDist()));
+                e.stopImmediatePropagation();
+            }
+        }, true);
+        window.addEventListener('pointerup', (e) => {
+            touches.delete(e.pointerId);
+            if (touches.size < 2) pinch0 = 0;
+            if (touches.size > 0 || e.pointerType === 'mouse') return;
+            const wasPinch = pinched; pinched = false;
+            const isTap = !wasPinch && !interaction.letterOpen && !interaction.isHolding &&
+                interaction.dragDistance < 14 && performance.now() - interaction.holdStartTime < 260 &&
+                !(e.target.closest && e.target.closest('.ui-btn'));
+            if (!isTap) return;
+            const now = performance.now();
+            if (now - lastTap.t < 340 && Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < 40) {
+                lastTap.t = 0;
+                trigger2011SupernovaAndLetter();
+            } else {
+                lastTap = { t: now, x: e.clientX, y: e.clientY };
+            }
+        }, true);
+        window.addEventListener('pointercancel', (e) => { touches.delete(e.pointerId); if (touches.size < 2) pinch0 = 0; if (!touches.size) pinched = false; }, true);
+
+        ['pointerup', 'click', 'touchend'].forEach(ev => window.addEventListener(ev, () => audioEngine.init(), { passive: true }));
+        window.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        const bindBtn = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener('click', (e) => { e.stopPropagation(); fn(); }); };
+        bindBtn('btnPalette', () => triggerSpacebarChromaticShift());
+        bindBtn('btnLetter', () => { if (!interaction.letterOpen) trigger2011SupernovaAndLetter(); });
+        bindBtn('btnNext', () => cyclePoetic2011Letter());
+        bindBtn('btnClose', () => dismissLoveLetter());
+
+        // Màn hình dọc: lùi camera ra để cuốn sách không bị cắt hai bên
+        function updateFit() {
+            const a = camera.aspect;
+            fitBoost = a < 1 ? Math.min(1.7, Math.pow(1 / a, 0.6)) : 1;
+        }
+
+        // Máy yếu: tự giảm độ phân giải từng bậc nếu khung hình dưới ~42 fps
+        let _pf = 0, _pt = performance.now();
+        document.addEventListener('visibilitychange', () => { _pf = 0; _pt = performance.now(); });
+        function perfTick() {
+            if (++_pf < 90) return;
+            const now = performance.now(), fps = _pf * 1000 / (now - _pt);
+            _pf = 0; _pt = now;
+            if (fps < 42 && curDPR > 1) {
+                curDPR = Math.max(1, curDPR - 0.25);
+                renderer.setPixelRatio(curDPR);
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                particleShaderMaterial.uniforms.uPixelRatio.value = curDPR;
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            particleShaderMaterial.uniforms.uPixelRatio.value = curDPR;
+            updateFit();
+        });
+
+        window.onload = () => {
+            updateFit();
+            animate();
+        };
+    </script>
 </body>
 </html>
